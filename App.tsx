@@ -1,21 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
+import { TapToPushStyleImpl } from './src/presenter/styles';
+import TapToPushViewImpl from './src/presenter/TapToPushView';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+class App extends React.PureComponent {
+  render() {
+    return (
+      <View style={{ backgroundColor: 'tomato', flex: 1 }}>
+        <TapToPushViewImpl title={'Open panel'} styles={TapToPushStyleImpl} leftLabel={'Help'} />
+      </View>
+    )
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
