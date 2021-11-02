@@ -3,7 +3,7 @@
 
 
 # What is this
-An example React Native to make an interactive panel component.
+A React Native example to make an interactive panel component.
 
 # Mechanism
 Without external libraries. Using Animated and PanResponder.
