@@ -1,7 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, LogBox } from 'react-native';
 import { TapToPushStyleImpl } from './src/presenter/styles';
 import TapToPushViewImpl from './src/presenter/TapToPushView';
+
+LogBox.ignoreAllLogs();
 
 class App extends React.PureComponent {
   render() {

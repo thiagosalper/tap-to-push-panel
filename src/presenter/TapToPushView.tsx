@@ -3,14 +3,11 @@ import {
   Animated,
   PanResponder,
   View,
-  TouchableOpacity,
-  Text,
 } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
 import { TapToPushView } from './models';
 import { ScreenSize } from '../constants';
 import { isDropArea } from './utils';
-import { DragButton } from './components';
+import { DragButtonComponent, DragHeaderComponent } from './components';
 
 const TapToPushViewImpl: React.FC<TapToPushView> = ({ children, title, styles, leftLabel }) => {
   const [dragable, setDragable] = useState(true);
@@ -58,27 +55,21 @@ const TapToPushViewImpl: React.FC<TapToPushView> = ({ children, title, styles, l
 
   return (
     <Animated.View style={[styles.base, {transform: [{ translateY: pan.y }]}]}>
-      {dragable && <DragButton styles={styles.dragButton} panHandlers={panResponder.panHandlers} />}
+      {dragable && (
+        <DragButtonComponent 
+          styles={styles.dragButton} 
+          panHandlers={panResponder.panHandlers} />
+      )}
       {!dragable && (
-         <View style={[styles.baseHeader, styles.flexHorz]}>
-          <TouchableOpacity onPress={resetPanel}>
-            <Entypo 
-              name={'chevron-thin-down'} 
-              size={24} 
-              color={'blue'} 
-            />
-          </TouchableOpacity>
-
-          <Text style={styles.title}>{title}</Text>
-          <TouchableOpacity onPress={() => {}}>
-            <Text>{leftLabel}</Text>
-          </TouchableOpacity>
-        </View>
+        <DragHeaderComponent 
+          styleBase={{...styles.baseHeader, ...styles.flexHorz}} 
+          title={title}
+          styleTitle={styles.title}
+          resetPanel={resetPanel}
+          leftLabel={leftLabel}
+          leftAction={() => {}} />
       ) }
-      
-      <View>
-      {children}
-      </View>
+      <View>{children}</View>
     </Animated.View>
   )
 };
